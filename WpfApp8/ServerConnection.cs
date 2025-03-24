@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace WpfApp8
 {
-    class ServerConnection
+    public class ServerConnection
     {
         HttpClient client = new HttpClient();
         string serverUrl = "";
@@ -111,13 +111,50 @@ namespace WpfApp8
                 JsonData data = JsonConvert.DeserializeObject<JsonData>(result);
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                MessageBox.Show(e.Message);
             }
     
             return false;
+        }
+        public async Task<List<string>> AllNames()
+        {
+            List<string> allnames = new List<string>();
+            string url = serverUrl + "/AllNames";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string result = await response.Content.ReadAsStringAsync();
+                allnames = JsonConvert.DeserializeObject<List<JsonData2>>(result).Select(item => item.name).ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+
+            }
+
+            return allnames;
+        }
+        public async Task<List<string>> AllAges()
+        {
+            List<string> allages = new List<string>();
+            string url = serverUrl + "/AllAges";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string result = await response.Content.ReadAsStringAsync();
+                allages = JsonConvert.DeserializeObject<List<JsonData2>>(result).Select(item => item.age.ToString()).ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+
+            }
+
+            return allages;
         }
     }
 }

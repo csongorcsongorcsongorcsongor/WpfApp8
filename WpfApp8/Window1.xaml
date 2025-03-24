@@ -17,28 +17,34 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel
+            Margin="20"
             Grid.Column="1"
             Background="AliceBlue"
             Name="NameStackPanel"
             >
-            <TextBlock
-                Text="Name"
-                FontSize="20"
-                HorizontalAlignment="Center"/>
         </StackPanel>
         <StackPanel
             Grid.Column="2"
-            
+                        Margin="20"
+
             Background="AliceBlue"
             Name="AgeStackPanel"
             >
 
-            <TextBlock
+            
+
+        </StackPanel>
+
+        <TextBlock
+            Grid.Column="1"
+                Text="Name"
+                FontSize="20"
+                HorizontalAlignment="Center"/>
+        <TextBlock
+            Grid.Column="2"
                 Text="Age"
                 FontSize="20"
                 HorizontalAlignment="Center"/>
-
-        </StackPanel>
         <Button
             Grid.Row="1"
             Grid.Column="2"
@@ -59,7 +65,9 @@
             Grid.Column="1"
             Width="200"
             Height="70"
-            Background="AntiqueWhite"/>
+            Background="AntiqueWhite"
+            Text="Name"
+            Name="NameInput"/>
 
         <TextBox
             Grid.Row="1"
@@ -67,7 +75,9 @@
             Width="150"
             Margin="10 10 100 10"
             Height="70"
-            Background="AntiqueWhite"/>
+            Background="AntiqueWhite"
+            Name="AgeInput"
+            Text="Age"/>
 
     </Grid>
 </Window>

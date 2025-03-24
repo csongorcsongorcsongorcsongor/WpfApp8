@@ -28,7 +28,7 @@ namespace WpfApp8
         }
         void start()
         {
-            connection = new ServerConnection("http://127.1.1.1");
+            connection = new ServerConnection("http://127.1.1.1:3000");
         }
         async void LoginClick(object s, EventArgs e)
         {
@@ -37,8 +37,10 @@ namespace WpfApp8
             {
                 MessageBox.Show("Sikeres bejelentkezés");
                 afterlogin a = new afterlogin(connection) { Top = this.Top, Left = this.Left, Visibility = Visibility.Visible };
+                Window1 b = new Window1(connection) { Top = this.Top, Left = this.Left, Visibility = Visibility.Visible };
                 this.Hide();
                 a.Show();
+                b.Show();
                 a.Closing += (ss, ee) =>
                 {
                     this.Show();

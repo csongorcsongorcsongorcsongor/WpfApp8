@@ -29,12 +29,32 @@ namespace WpfApp8
         }
         void start()
         {
-
+            asd();
         }
         async void create(object s, EventArgs e)
         {
-
+            bool temp = await connection.createPerson(NameInput.Text, Convert.ToInt32(AgeInput.Text));
+            if (temp)
+            {
+                MessageBox.Show("Sikeres létrehozás");
+                asd();
+            }
         }
+        async void asd()
+        {
 
+            NameStackPanel.Children.Clear();
+            AgeStackPanel.Children.Clear();
+            List<string> allnames = await connection.AllNames();
+            foreach (string item in allnames)
+            {
+                NameStackPanel.Children.Add(new TextBlock() { Text = item });
+            }
+            List<string> allages = await connection.AllAges();
+            foreach (string item in allages)
+            {
+                AgeStackPanel.Children.Add(new TextBlock() { Text = item });
+            }
+        }
     }
 }
