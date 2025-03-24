@@ -20,7 +20,7 @@ namespace WpfApp8
     /// </summary>
     public partial class MainWindow : Window
     {
-        ServerConnection connection;
+        public ServerConnection connection;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace WpfApp8
             if (temp)
             {
                 MessageBox.Show("Sikeres bejelentkezés");
-                afterlogin a = new afterlogin() { Top = this.Top, Left = this.Left, Visibility = Visibility.Visible };
+                afterlogin a = new afterlogin(connection) { Top = this.Top, Left = this.Left, Visibility = Visibility.Visible };
                 this.Hide();
                 a.Show();
                 a.Closing += (ss, ee) =>
