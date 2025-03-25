@@ -45,16 +45,37 @@ namespace WpfApp8
 
             NameStackPanel.Children.Clear();
             AgeStackPanel.Children.Clear();
+            RemoveStackPanel.Children.Clear();
             List<string> allnames = await connection.AllNames();
             foreach (string item in allnames)
             {
-                NameStackPanel.Children.Add(new TextBlock() { Text = item });
+                TextBlock namelabel = new TextBlock();
+                namelabel.Text = item;
+                NameStackPanel.Children.Add(namelabel);
+                Button removebtn = new Button();
+                removebtn.Content = "X";
+                removebtn.Height = namelabel.Height;
+                removebtn.Click += async (s, e) =>
+                {
+                    bool temp = await connection.deletePerson(namelabel.Text);
+                    if (temp)
+                    {
+                        MessageBox.Show("Sikeres törlés");
+                        asd();
+
+                    }
+                };
+                RemoveStackPanel.Children.Add(removebtn);
             }
             List<string> allages = await connection.AllAges();
             foreach (string item in allages)
             {
                 AgeStackPanel.Children.Add(new TextBlock() { Text = item });
+                
             }
+
+            
+
         }
     }
 }
