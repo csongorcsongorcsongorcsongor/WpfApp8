@@ -196,5 +196,25 @@ namespace WpfApp8
             }
             return false;
         }
+        public async Task<bool> editPerson(string name, string OldName, int age)
+        {
+            string url = serverUrl + "/edit";
+            try
+            {
+                var jsonInfo = new {newName = name, Oldname = OldName, newAge = age};
+                string jsonStringified = JsonConvert.SerializeObject(jsonInfo);
+                HttpContent sendThis = new StringContent(jsonStringified, Encoding.UTF8, "Application/json");
+                HttpResponseMessage response = await client.PutAsync(url, sendThis);
+                response.EnsureSuccessStatusCode();
+                string result = await response.Content.ReadAsStringAsync();
+                JsonData data = JsonConvert.DeserializeObject<JsonData>(result);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return false;
+        }
     }
 }

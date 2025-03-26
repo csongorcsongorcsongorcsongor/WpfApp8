@@ -29,6 +29,7 @@ namespace WpfApp8
         }
         void start()
         {
+            savebtn.IsEnabled = false;
             asd();
         }
         async void create(object s, EventArgs e)
@@ -49,19 +50,37 @@ namespace WpfApp8
                 asd();
             }
         }
+        public string oldname;
+        public int selectedIndex;
+
         async void asd()
         {
 
             NameStackPanel.Children.Clear();
             AgeStackPanel.Children.Clear();
             RemoveStackPanel.Children.Clear();
+            EditStackPanel.Children.Clear();
+            List<string> allages = await connection.AllAges();
+
+            foreach (string item in allages)
+            {
+
+                AgeStackPanel.Children.Add(new TextBlock() { Text = item });
+
+            }
             List<string> allnames = await connection.AllNames();
             foreach (string item in allnames)
             {
                 TextBlock namelabel = new TextBlock();
-                namelabel.Text = item;
-                NameStackPanel.Children.Add(namelabel);
                 Button removebtn = new Button();
+                Button editbtn = new Button();
+
+                namelabel.Text = item;
+
+                NameStackPanel.Children.Add(namelabel);
+                RemoveStackPanel.Children.Add(removebtn);
+                EditStackPanel.Children.Add(editbtn);
+
                 removebtn.Content = "X";
                 removebtn.Height = namelabel.Height;
                 removebtn.Click += async (s, e) =>
@@ -74,17 +93,34 @@ namespace WpfApp8
 
                     }
                 };
-                RemoveStackPanel.Children.Add(removebtn);
-            }
-            List<string> allages = await connection.AllAges();
-            foreach (string item in allages)
-            {
-                AgeStackPanel.Children.Add(new TextBlock() { Text = item });
+
+                editbtn.Content = "EDIT";
+                editbtn.Height = namelabel.Height;
+                editbtn.Click += (s, e) =>
+                {
+                    selectedIndex = EditStackPanel.Children.IndexOf(editbtn);
+                    savebtn.IsEnabled = true;
+                    NameInput.Text = item;
+                    string agetext = ((TextBlock)AgeStackPanel.Children[selectedIndex]).Text;
+                    oldname = item;
+                    AgeInput.Text = agetext;
+                    
+                };
                 
             }
-
-            
-
+        }
+        async void save(object s, EventArgs e)
+        {
+            bool temp = await connection.editPerson(NameInput.Text, oldname, Convert.ToInt32(AgeInput.Text));
+            if (temp)
+            {
+                MessageBox.Show("Sikeres módosítás");
+                
+                NameInput.Clear();
+                AgeInput.Clear();
+                savebtn.IsEnabled = false;
+                asd();
+            }
         }
     }
 }

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp8"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="450" Width="1400">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -37,7 +38,7 @@
         </StackPanel>
         <StackPanel
             Grid.Column="3"
-                        Margin="5 20"
+                        Margin="38,20,255,20"
 
             Background="AliceBlue"
             Name="RemoveStackPanel"
@@ -58,12 +59,14 @@
                 HorizontalAlignment="Center"/>
         <Button
             Grid.Row="1"
-            Grid.Column="2"
-            Grid.ColumnSpan="2"
+            Grid.Column="3"
             Background="DodgerBlue"
+            
+            HorizontalAlignment="Center"
+  
+            VerticalAlignment="Center"
             Width="60"
             Height="30"
-            Margin="180 5 5 10"
             Content="gomb"
             Click="create"
             />
@@ -83,11 +86,11 @@
 
         <TextBox
             Grid.Row="1"
-                        Grid.ColumnSpan="2"
+                        
 
             Grid.Column="2"
             Width="150"
-            Margin="10 10 100 10"
+            
             Height="70"
             Background="AntiqueWhite"
             Name="AgeInput"
@@ -96,10 +99,33 @@
             Click="deleteAll"
             Background="DodgerBlue"
             Content="Összes törlése"
-            HorizontalAlignment="Left"
-            Margin="157,10,0,0"
-            VerticalAlignment="Top"
-            Width="87"/>
+            HorizontalAlignment="Center"
+            Margin="10 80 10 10"
+            VerticalAlignment="Center"
+            Width="87" Grid.ColumnSpan="2" Grid.Column="3" Grid.Row="1"
+            />
+        <StackPanel
+            
+            Margin="320,20,313,20"
+
+            Background ="LightBlue"
+            Name="EditStackPanel" Grid.ColumnSpan="2" Grid.Column="2"
+            />
+        <Button
+            Grid.Row="1"
+            Grid.Column="3"
+            Background="DodgerBlue"
+            
+            HorizontalAlignment="Center"
+  
+            VerticalAlignment="Center"
+            Width="132"
+            Height="30"
+            Content="Módosítások mentése"
+            Click="save"
+            Name="savebtn"
+            Margin="119,54,89,125"
+            />
 
     </Grid>
 </Window>
