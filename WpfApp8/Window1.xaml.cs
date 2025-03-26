@@ -40,6 +40,15 @@ namespace WpfApp8
                 asd();
             }
         }
+        async void deleteAll(object s, EventArgs e)
+        {
+            bool temp = await connection.deleteAll();
+            if (temp)
+            {
+                MessageBox.Show("Sikeres törlés");
+                asd();
+            }
+        }
         async void asd()
         {
 
