@@ -34,20 +34,36 @@ namespace WpfApp8
         }
         async void create(object s, EventArgs e)
         {
-            bool temp = await connection.createPerson(NameInput.Text, Convert.ToInt32(AgeInput.Text));
-            if (temp)
+            try
             {
-                MessageBox.Show("Sikeres létrehozás");
-                asd();
+                bool temp = await connection.createPerson(NameInput.Text, Convert.ToInt32(AgeInput.Text));
+                if (temp)
+                {
+                    MessageBox.Show("Sikeres létrehozás");
+                    asd();
+                }
             }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            
         }
         async void deleteAll(object s, EventArgs e)
         {
-            bool temp = await connection.deleteAll();
-            if (temp)
+            try
             {
-                MessageBox.Show("Sikeres törlés");
-                asd();
+                bool temp = await connection.deleteAll();
+                if (temp)
+                {
+                    MessageBox.Show("Sikeres törlés");
+                    asd();
+                }
+            }
+            
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
             }
         }
         public string oldname;
